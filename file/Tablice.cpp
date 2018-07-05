@@ -6,6 +6,12 @@ Tablice::Tablice(int x,int y,int wielkosc)
 {
     this->create(x,y);
     this->wielkosc_grafik = wielkosc;
+    if(!this->Texture.loadFromFile("file/art/sciana.png"))
+    {
+        std::cout << "brak obrazka: file/art/sciana.png" << std::endl;
+    }
+    this->Sprite.setTexture(this->Texture);
+    this->Sprite.scale(0.5,0.5);
 }
 
 Tablice::Tablice(int x,int y,int wielkosc,std::string adres)
@@ -17,6 +23,7 @@ Tablice::Tablice(int x,int y,int wielkosc,std::string adres)
         std::cout << "brak obrazka " << adres << std::endl;
     }
     this->Sprite.setTexture(this->Texture);
+    this->Sprite.scale(0.5,0.5);
 }
 
 Tablice::~Tablice()

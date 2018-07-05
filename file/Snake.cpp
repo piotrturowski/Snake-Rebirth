@@ -38,11 +38,18 @@ Snake::Snake(int x,int y,Tablice& mapa)
         this->Y_ogonu[i] = this->Y;
         mapa.tab[this->X][this->Y] = 2;
     }
-    if(!this->Texture_glowa.loadFromFile("file/Base/glowa.png"))
+    if(!this->Texture_glowa.loadFromFile("file/art/glowa.png"))
     {
-        std::cout << "brak obrazek " << "file/Base/glowa.png" << std::endl;
+        std::cout << "brak obrazek " << "file/art/glowa.png" << std::endl;
     }
     this->Sprite_glowa.setTexture(this->Texture_glowa);
+    this->Sprite_glowa.scale(0.5,0.5);
+    if(!this->Texture_cialo.loadFromFile("file/art/cialo.png"))
+    {
+        std::cout << "brak obrazek " << "file/art/cialo.png" << std::endl;
+    }
+    this->Sprite_cialo.setTexture(this->Texture_cialo);
+    this->Sprite_cialo.scale(0.5,0.5);
 }
 
 Snake::~Snake()

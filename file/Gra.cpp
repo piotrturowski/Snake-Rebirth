@@ -14,13 +14,13 @@ Game::~Game()
 
 void Game::run(Aplikacja& App)
 {
-    while(!(this->wyjscie(App))&&App.okno.isOpen())
+    std::cout << "." << std::endl;
+    while(App.okno.isOpen())
     {
         this->sterowanie(App);
         this->ustaw_ID_na_mapie();
         this->draw(App);
-        this->mapa.show();
-
+        //this->mapa.show();
     }
 }
 
@@ -99,7 +99,7 @@ void Game::draw(Aplikacja& App)
         {
             for(int j = 0; j<=this->mapa.Y; j++)
             {
-                switch(mapa.tab[i][j])
+                switch(this->mapa.tab[i][j])
                 {
                 case 2:
                     {
@@ -123,14 +123,15 @@ void Game::draw(Aplikacja& App)
                         break;
                     }
                     */
-                    /*
+
                 case 4:
                     {
-                        sprite_sciana.setPosition(i * mapa.wielkosc_grafik,j * mapa.wielkosc_grafik);
-                        scena.draw(sprite_sciana);
+                        this->mapa.Sprite.setPosition(i * this->mapa.wielkosc_grafik,j * this->mapa.wielkosc_grafik);
+                        //std::cout << (i * this->mapa.wielkosc_grafik) << std::endl << (j * this->mapa.wielkosc_grafik) << std::endl << std::endl;
+                        App.okno.draw(this->mapa.Sprite);
                         break;
                     }
-                    */
+
                     /*
                 case 5:
                     {
@@ -147,10 +148,12 @@ void Game::draw(Aplikacja& App)
                     }
 
                 }
+                //std::cout << i << std::endl << j << std::endl << std::endl;
             }
 
         }
-    App.okno.display();
+        App.okno.display();
+
 
 }
 

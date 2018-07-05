@@ -1,0 +1,7 @@
+bin/
+obj/
+version.h
+*.cbp
+*.depend
+*.layout
+.gitignore.txt
