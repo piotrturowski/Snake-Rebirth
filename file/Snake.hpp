@@ -35,7 +35,7 @@ public:
     sf::Sprite Sprite_cialo;
 
 
-
+    bool kolizja();
 //sterowanie
     void Sterowanie(Tablice& mapa);
 //rekurencja ruchu ogona

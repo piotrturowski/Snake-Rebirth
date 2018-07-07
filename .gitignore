@@ -1,6 +1,8 @@
+bin/
 obj/
 version.h
 *.cbp
 *.depend
 *.layout
 .gitignore.txt
+bin/Debug/Snake Rebirth.exe

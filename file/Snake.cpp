@@ -131,3 +131,17 @@ void Snake::ruch_ogona(int licznik)
         }
     }
 }
+
+bool Snake::kolizja()
+{
+    for(int i = 0 ; i <= this->pkt+1 ; i++)
+    {
+//kolizja glowy z ogonem
+        if(this->X == this->X_ogonu[i]&& this->Y == Y_ogonu[i])
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
