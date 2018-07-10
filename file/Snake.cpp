@@ -75,6 +75,7 @@ void Snake::Sterowanie(Tablice& mapa)
             this->blad_ruchu_Y = 0;
 //obrot grafiki
             this->Sprite_glowa.setRotation(90);
+            this->znak_do_bledu_podwojnego_klawisza = 115;
             break;
         }
     case 115:
@@ -86,6 +87,7 @@ void Snake::Sterowanie(Tablice& mapa)
             this->blad_ruchu_Y = mapa.wielkosc_grafik;
 //obrot grafiki
             this->Sprite_glowa.setRotation(270);
+            this->znak_do_bledu_podwojnego_klawisza = 119;
             break;
         }
     case 97:
@@ -97,6 +99,7 @@ void Snake::Sterowanie(Tablice& mapa)
             this->blad_ruchu_Y = 0;
 //obrot grafiki
             this->Sprite_glowa.setRotation(0);
+            this->znak_do_bledu_podwojnego_klawisza = 100;
             break;
         }
     case 100:
@@ -108,6 +111,7 @@ void Snake::Sterowanie(Tablice& mapa)
             this->blad_ruchu_X = mapa.wielkosc_grafik;
 //obrot grafiki
             this->Sprite_glowa.setRotation(180);
+            this->znak_do_bledu_podwojnego_klawisza = 97;
             break;
         }
     }
@@ -144,4 +148,48 @@ bool Snake::kolizja()
     }
 
     return false;
+}
+
+void Snake::dodaj_punkt(Punkty& pkt,Tablice& mapa)
+{
+    if(this->X == pkt.X && this->Y == pkt.Y)
+    {
+        this->pkt++;
+        this->dodaj_wzrost_weza();
+        pkt.losuj(mapa.X,mapa.Y);
+    }
+}
+
+void Snake::dodaj_wzrost_weza()
+{
+        int X_ogonu2[this->pkt+1];
+        int Y_ogonu2[this->pkt+1];
+        for(int i = 0; i <= this->pkt+1 ; i++)
+        {
+
+            if(this->pkt >= i)
+            {
+                X_ogonu2[i] = this->X_ogonu[i];
+                Y_ogonu2[i] = this->Y_ogonu[i];
+
+            }
+            else
+            {
+
+                X_ogonu2[i] = this->X_ogonu[i-1];
+                Y_ogonu2[i] = this->Y_ogonu[i-1];
+            }
+        }
+
+        delete[] this->X_ogonu;
+        delete[] this->Y_ogonu;
+
+        this->X_ogonu = new int [this->pkt+2];
+        this->Y_ogonu = new int [this->pkt+2];
+
+        for(int i = 0; i <= this->pkt+1 ; i++)
+        {
+            this->X_ogonu[i] = X_ogonu2[i];
+            this->Y_ogonu[i] = Y_ogonu2[i];
+        }
 }

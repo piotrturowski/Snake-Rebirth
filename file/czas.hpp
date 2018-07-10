@@ -7,7 +7,6 @@ class czaS
 public:
     sf::Time time;
     float czas;
-    bool czas_na_1s;
     sf::Clock clock;
 
     czaS();

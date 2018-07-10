@@ -11,6 +11,7 @@ Aplikacja::Aplikacja()
     this->okno.create(sf::VideoMode(this->wysokosc,this->szerokosc),this->nazwa);
     this->mysz_X=0;
     this->mysz_Y=0;
+    this->okno.setFramerateLimit(30);
 }
 
 Aplikacja::~Aplikacja()

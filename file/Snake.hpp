@@ -1,6 +1,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "Tablice.hpp"
+#include "Punkty.hpp"
 #ifndef SNAKE_HPP_INCLUDED
 #define SNAKE_HPP_INCLUDED
 
@@ -42,6 +43,10 @@ public:
     void ruch_ogona(int licznik);
 //
     void aktualizuj_wynik();
+
+    void dodaj_punkt(Punkty& pkt,Tablice& mapa);
+
+    void dodaj_wzrost_weza();
 
 //konstruktor domyslny
     Snake();

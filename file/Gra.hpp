@@ -4,6 +4,7 @@
 #include "czas.hpp"
 #include "funkcjeGry.hpp"
 #include <SFML/Graphics.hpp>
+#include "Punkty.hpp"
 #ifndef Gra_hpp
 #define Gra_hpp
 
@@ -16,6 +17,7 @@ public:
     Snake waz;
     czaS czas;
     funkcje Funkcje;
+    Punkty pkt;
 
     void run(Aplikacja& App);
 

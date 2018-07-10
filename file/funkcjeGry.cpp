@@ -11,7 +11,7 @@ bool funkcje::wyjscie(Aplikacja& App)
     return false;
 }
 
-void funkcje::sterowanie(Aplikacja& App,Game& Gra)
+void funkcje::sterowanie(Aplikacja& App,Snake& waz)
 {
     while(App.okno.pollEvent(this->event))
         {
@@ -21,37 +21,37 @@ void funkcje::sterowanie(Aplikacja& App,Game& Gra)
                 {
                 case sf::Keyboard::W:
                     {
-                        Gra.waz.aktualny_znak = 119;
-                        if(Gra.waz.aktualny_znak != Gra.waz.znak_do_bledu_podwojnego_klawisza)
+                        waz.aktualny_znak = 119;
+                        if(waz.aktualny_znak != waz.znak_do_bledu_podwojnego_klawisza)
                         {
-                            Gra.waz.znak = 119;
+                            waz.znak = 119;
                         }
                         break;
                     }
                 case sf::Keyboard::S:
                     {
-                        Gra.waz.aktualny_znak = 115;
-                            if(Gra.waz.aktualny_znak != Gra.waz.znak_do_bledu_podwojnego_klawisza)
+                        waz.aktualny_znak = 115;
+                        if(waz.aktualny_znak != waz.znak_do_bledu_podwojnego_klawisza)
                         {
-                            Gra.waz.znak = 115;
+                            waz.znak = 115;
                         }
                         break;
                     }
                 case sf::Keyboard::A:
                     {
-                        Gra.waz.aktualny_znak = 97;
-                        if(Gra.waz.aktualny_znak != Gra.waz.znak_do_bledu_podwojnego_klawisza)
+                        waz.aktualny_znak = 97;
+                        if(waz.aktualny_znak != waz.znak_do_bledu_podwojnego_klawisza)
                         {
-                            Gra.waz.znak = 97;
+                            waz.znak = 97;
                         }
                         break;
                     }
                 case sf::Keyboard::D:
                     {
-                        Gra.waz.aktualny_znak = 100;
-                        if(Gra.waz.aktualny_znak != Gra.waz.znak_do_bledu_podwojnego_klawisza)
+                        waz.aktualny_znak = 100;
+                        if(waz.aktualny_znak != waz.znak_do_bledu_podwojnego_klawisza)
                         {
-                            Gra.waz.znak = 100;
+                            waz.znak = 100;
                         }
                         break;
                     }
@@ -69,43 +69,40 @@ void funkcje::sterowanie(Aplikacja& App,Game& Gra)
         }
 }
 
-void funkcje::draw(Aplikacja& App,Game& Gra)
+void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt)
 {
     App.okno.clear(sf::Color::Green);
-    for(int i = 0; i<=Gra.mapa.X; i++)
+    for(int i = 0; i<=mapa.X; i++)
         {
-            for(int j = 0; j<=Gra.mapa.Y; j++)
+            for(int j = 0; j<=mapa.Y; j++)
             {
-                switch(Gra.mapa.tab[i][j])
+                switch(mapa.tab[i][j])
                 {
                 case 2:
                     {
-                        Gra.waz.Sprite_cialo.setPosition(i * Gra.mapa.wielkosc_grafik, j * Gra.mapa.wielkosc_grafik);
-                        App.okno.draw(Gra.waz.Sprite_cialo);
+                        waz.Sprite_cialo.setPosition(i * mapa.wielkosc_grafik, j * mapa.wielkosc_grafik);
+                        App.okno.draw(waz.Sprite_cialo);
                         break;
                     }
-                    /*
                 case 3:
                     {
                         for(int k = 0 ; k<=waz.pkt+1;k++)
                         {
                             if(waz.X_ogonu[k] == i && waz.Y_ogonu[k] == j)
                             {
-                                sprite_cialo.setPosition(i * mapa.wielkosc_grafik,j * mapa.wielkosc_grafik);
-                                scena.draw(sprite_cialo);
+                                waz.Sprite_cialo.setPosition(i * mapa.wielkosc_grafik,j * mapa.wielkosc_grafik);
+                                App.okno.draw(waz.Sprite_cialo);
                             }
                         }
-                        sprite_punkt.setPosition(i * mapa.wielkosc_grafik,j * mapa.wielkosc_grafik);
-                        scena.draw(sprite_punkt);
+                        pkt.Sprite.setPosition(i * mapa.wielkosc_grafik,j * mapa.wielkosc_grafik);
+                        App.okno.draw(pkt.Sprite);
                         break;
                     }
-                    */
-
                 case 4:
                     {
-                        Gra.mapa.Sprite.setPosition(i * Gra.mapa.wielkosc_grafik,j * Gra.mapa.wielkosc_grafik);
-                        //std::cout << (i * Gra.mapa.wielkosc_grafik) << std::endl << (j * Gra.mapa.wielkosc_grafik) << std::endl << std::endl;
-                        App.okno.draw(Gra.mapa.Sprite);
+                        mapa.Sprite.setPosition(i * mapa.wielkosc_grafik,j * mapa.wielkosc_grafik);
+                        //std::cout << (i * mapa.wielkosc_grafik) << std::endl << (j * mapa.wielkosc_grafik) << std::endl << std::endl;
+                        App.okno.draw(mapa.Sprite);
                         break;
                     }
 
@@ -119,8 +116,8 @@ void funkcje::draw(Aplikacja& App,Game& Gra)
                     */
                 case 1:
                     {
-                        Gra.waz.Sprite_glowa.setPosition(i * Gra.mapa.wielkosc_grafik + Gra.waz.blad_ruchu_X ,j * Gra.mapa.wielkosc_grafik + Gra.waz.blad_ruchu_Y);
-                        App.okno.draw(Gra.waz.Sprite_glowa);
+                        waz.Sprite_glowa.setPosition(i * mapa.wielkosc_grafik + waz.blad_ruchu_X ,j * mapa.wielkosc_grafik + waz.blad_ruchu_Y);
+                        App.okno.draw(waz.Sprite_glowa);
                         break;
                     }
 
@@ -134,28 +131,28 @@ void funkcje::draw(Aplikacja& App,Game& Gra)
 
 }
 
-void funkcje::ustaw_ID_na_mapie(Game& Gra)
+void funkcje::ustaw_ID_na_mapie(Tablice& mapa,Snake& waz,Punkty& pkt)
 {
-    Gra.mapa.zeruj();//czyszczenie mapy
+    mapa.zeruj();//czyszczenie mapy
     int XX;
     int YY;
-    Gra.mapa.tab[Gra.waz.X][Gra.waz.Y] = Gra.waz.ID;//ustawianie ID glowy snake
-    for(int i = 0; i<=Gra.waz.pkt+1; i++)
+    mapa.tab[waz.X][waz.Y] = waz.ID;//ustawianie ID glowy snake
+    for(int i = 0; i<=waz.pkt+1; i++)
     {
-        XX = Gra.waz.X_ogonu[i];
-        YY = Gra.waz.Y_ogonu[i];
-        Gra.mapa.tab[XX][YY] = Gra.waz.ogon_ID; // ustawianie ID ciala snake
+        XX = waz.X_ogonu[i];
+        YY = waz.Y_ogonu[i];
+        mapa.tab[XX][YY] = waz.ogon_ID; // ustawianie ID ciala snake
     }
 
-    //Gra.mapa.tab[pkt.pkt_x][pkt.pkt_y] = 3; // ustawianie ID punktu
+    mapa.tab[pkt.X][pkt.Y] = pkt.ID; // ustawianie ID punktu
 
-    for(int j =  0; j<= Gra.mapa.X; j++)
+    for(int j =  0; j<= mapa.X; j++)
     {
-        for(int k = 0; k<=Gra.mapa.Y; k++)
+        for(int k = 0; k<=mapa.Y; k++)
         {
-            if(j==0||j==Gra.mapa.X||k==0||k==Gra.mapa.Y)
+            if(j==0||j==mapa.X||k==0||k==mapa.Y)
             {
-                Gra.mapa.tab[j][k] = 4; // scian
+                mapa.tab[j][k] = 4; // scian
             }
 
         }
@@ -168,22 +165,24 @@ void funkcje::ustaw_ID_na_mapie(Game& Gra)
     */
 }
 
-void funkcje::kolizje(Aplikacja& App,Game& Gra)
+void funkcje::kolizje(Aplikacja& App,Snake& waz,Tablice& mapa,Punkty& pkt)
 {
-    if(Gra.waz.kolizja()||this->kolizja(Gra))
+
+    if(waz.kolizja()||this->kolizja(waz,mapa))
     {
         App.okno.close();
     }
 
 }
 
-bool funkcje::kolizja(Game& Gra)
+bool funkcje::kolizja(Snake& waz,Tablice& mapa)
 {
 //kolizja z koncem mapy
-    if(Gra.waz.X == Gra.mapa.X || Gra.waz.Y == Gra.mapa.Y || Gra.waz.X == 0 || Gra.waz.Y == 0)
+    if(waz.X == mapa.X || waz.Y == mapa.Y || waz.X == 0 || waz.Y == 0)
     {
         return true;
     }
+
     return false;
 }
 
