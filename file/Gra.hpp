@@ -5,6 +5,7 @@
 #include "funkcjeGry.hpp"
 #include <SFML/Graphics.hpp>
 #include "Punkty.hpp"
+#include "Ruchoma.hpp"
 #ifndef Gra_hpp
 #define Gra_hpp
 
@@ -18,6 +19,8 @@ public:
     czaS czas;
     funkcje Funkcje;
     Punkty pkt;
+    Sciana Ruchoma;
+
 
     void run(Aplikacja& App);
 

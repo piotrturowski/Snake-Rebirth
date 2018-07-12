@@ -69,7 +69,7 @@ void funkcje::sterowanie(Aplikacja& App,Snake& waz)
         }
 }
 
-void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt)
+void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruchoma)
 {
     App.okno.clear(sf::Color::Green);
     for(int i = 0; i<=mapa.X; i++)
@@ -105,15 +105,12 @@ void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt)
                         App.okno.draw(mapa.Sprite);
                         break;
                     }
-
-                    /*
                 case 5:
                     {
-                        sprite_przeszkoda.setPosition(Ruchoma_sciana->X*mapa.wielkosc_grafik + Ruchoma_sciana->blad_ruchu_X,Ruchoma_sciana->Y*mapa.wielkosc_grafik + Ruchoma_sciana->blad_ruchu_y);
-                        scena.draw(sprite_przeszkoda);
+                        Ruchoma.Sprite.setPosition(Ruchoma.X*mapa.wielkosc_grafik + Ruchoma.blad_ruchu_X,Ruchoma.Y*mapa.wielkosc_grafik + Ruchoma.blad_ruchu_y);
+                        App.okno.draw(Ruchoma.Sprite);
                         break;
                     }
-                    */
                 case 1:
                     {
                         waz.Sprite_glowa.setPosition(i * mapa.wielkosc_grafik + waz.blad_ruchu_X ,j * mapa.wielkosc_grafik + waz.blad_ruchu_Y);
@@ -131,7 +128,7 @@ void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt)
 
 }
 
-void funkcje::ustaw_ID_na_mapie(Tablice& mapa,Snake& waz,Punkty& pkt)
+void funkcje::ustaw_ID_na_mapie(Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruchoma)
 {
     mapa.zeruj();//czyszczenie mapy
     int XX;
@@ -157,12 +154,9 @@ void funkcje::ustaw_ID_na_mapie(Tablice& mapa,Snake& waz,Punkty& pkt)
 
         }
     }
-    /*
-    if(this->mapa.ilosc_przeszkod == 1)
-    {
-        this->mapa.tab[Ruchoma_sciana->X][Ruchoma_sciana->Y] = Ruchoma_sciana->ID; // ustawianie ID przeszkody
-    }
-    */
+    mapa.tab[Ruchoma.X][Ruchoma.Y] = Ruchoma.ID; // ustawianie ID przeszkody
+
+
 }
 
 void funkcje::kolizje(Aplikacja& App,Snake& waz,Tablice& mapa,Punkty& pkt)
