@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Tablice.hpp"
 #include "Punkty.hpp"
+#include "Ruchoma.hpp"
 #ifndef SNAKE_HPP_INCLUDED
 #define SNAKE_HPP_INCLUDED
 
@@ -36,7 +37,9 @@ public:
     sf::Sprite Sprite_cialo;
 
 
-    bool kolizja();
+    bool kolizja_z_ogonem();
+
+    void kolizja_ogony_z_ruchoma_siana(Sciana& Ruchoma);
 //sterowanie
     void Sterowanie(Tablice& mapa);
 //rekurencja ruchu ogona

@@ -16,7 +16,7 @@ public:
     sf::Event event;
 
     void sterowanie(Aplikacja& App,Snake& waz);
-    void kolizje(Aplikacja& App, Snake& waz,Tablice& mapa,Punkty& pkt);
+    void kolizje(Aplikacja& App, Snake& waz,Tablice& mapa,Punkty& pkt,Sciana& Ruchoma);
     bool kolizja(Snake& waz,Tablice& mapa);
     bool wygrana();
     bool wyjscie(Aplikacja& App);

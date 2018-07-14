@@ -136,7 +136,7 @@ void Snake::ruch_ogona(int licznik)
     }
 }
 
-bool Snake::kolizja()
+bool Snake::kolizja_z_ogonem()
 {
     for(int i = 0 ; i <= this->pkt+1 ; i++)
     {
@@ -192,4 +192,15 @@ void Snake::dodaj_wzrost_weza()
             this->X_ogonu[i] = X_ogonu2[i];
             this->Y_ogonu[i] = Y_ogonu2[i];
         }
+}
+
+void Snake::kolizja_ogony_z_ruchoma_siana(Sciana& Ruchoma)
+{
+    for(int i = 0; i<=this->pkt+1; i++)
+    {
+        if(this->X_ogonu[i] == Ruchoma.X && this->Y_ogonu[i] == Ruchoma.Y)
+        {
+            this->pkt--;
+        }
+    }
 }

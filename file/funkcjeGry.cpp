@@ -159,13 +159,13 @@ void funkcje::ustaw_ID_na_mapie(Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruc
 
 }
 
-void funkcje::kolizje(Aplikacja& App,Snake& waz,Tablice& mapa,Punkty& pkt)
+void funkcje::kolizje(Aplikacja& App,Snake& waz,Tablice& mapa,Punkty& pkt,Sciana& Ruchoma)
 {
-
-    if(waz.kolizja()||this->kolizja(waz,mapa))
+    if(waz.kolizja_z_ogonem()||this->kolizja(waz,mapa))
     {
         App.okno.close();
     }
+    waz.kolizja_ogony_z_ruchoma_siana(Ruchoma);
 
 }
 
