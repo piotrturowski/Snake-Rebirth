@@ -69,7 +69,7 @@ void funkcje::sterowanie(Aplikacja& App,Snake& waz)
         }
 }
 
-void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruchoma)
+void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruchoma,Laser& laser)
 {
     App.okno.clear(sf::Color::Green);
     for(int i = 0; i<=mapa.X; i++)
@@ -78,6 +78,12 @@ void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& R
             {
                 switch(mapa.tab[i][j])
                 {
+                case 1:
+                    {
+                        waz.Sprite_glowa.setPosition(i * mapa.wielkosc_grafik + waz.blad_ruchu_X ,j * mapa.wielkosc_grafik + waz.blad_ruchu_Y);
+                        App.okno.draw(waz.Sprite_glowa);
+                        break;
+                    }
                 case 2:
                     {
                         waz.Sprite_cialo.setPosition(i * mapa.wielkosc_grafik, j * mapa.wielkosc_grafik);
@@ -111,12 +117,14 @@ void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& R
                         App.okno.draw(Ruchoma.Sprite);
                         break;
                     }
-                case 1:
+
+                case 6:
                     {
-                        waz.Sprite_glowa.setPosition(i * mapa.wielkosc_grafik + waz.blad_ruchu_X ,j * mapa.wielkosc_grafik + waz.blad_ruchu_Y);
-                        App.okno.draw(waz.Sprite_glowa);
+                        laser.Sprite.setPosition(i * mapa.wielkosc_grafik ,j * mapa.wielkosc_grafik);
+                        App.okno.draw(laser.Sprite);
                         break;
                     }
+
 
                 }
                 //std::cout << i << std::endl << j << std::endl << std::endl;
@@ -128,7 +136,7 @@ void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& R
 
 }
 
-void funkcje::ustaw_ID_na_mapie(Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruchoma)
+void funkcje::ustaw_ID_na_mapie(Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruchoma,Laser& laser)
 {
     mapa.zeruj();//czyszczenie mapy
     int XX;
@@ -155,8 +163,7 @@ void funkcje::ustaw_ID_na_mapie(Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruc
         }
     }
     mapa.tab[Ruchoma.X][Ruchoma.Y] = Ruchoma.ID; // ustawianie ID przeszkody
-
-
+    laser.ustaw_ID(mapa);
 }
 
 void funkcje::kolizje(Aplikacja& App,Snake& waz,Tablice& mapa,Punkty& pkt,Sciana& Ruchoma)

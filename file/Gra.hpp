@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "Punkty.hpp"
 #include "Ruchoma.hpp"
+#include "Laser.hpp"
 #ifndef Gra_hpp
 #define Gra_hpp
 
@@ -20,6 +21,7 @@ public:
     funkcje Funkcje;
     Punkty pkt;
     Sciana Ruchoma;
+    Laser laser;
 
 
     void run(Aplikacja& App);

@@ -56,6 +56,7 @@ void Tablice::show()
         }
         std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
 void Tablice::zeruj()
 {

@@ -128,3 +128,5 @@ void Sciana::losuj(Tablice& mapa)
         }
     }
 }
+
+

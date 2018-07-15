@@ -7,6 +7,7 @@ Game::Game(bool tryb_multiplayer)
     ,   waz(5,5,this->mapa)
     ,   pkt(this->mapa.X,this->mapa.Y)
     ,   Ruchoma(this->mapa)
+    ,   laser(this->mapa)
 {
     this->tryb_multi = tryb_multiplayer;
 }
@@ -30,10 +31,11 @@ void Game::run(Aplikacja& App)
                 this->Ruchoma.losuj(mapa);
             }
             this->Ruchoma.ruch_sciany();
+            this->laser.koniec(this->mapa);
+            this->laser.ruch(mapa);
         }
-        this->Funkcje.ustaw_ID_na_mapie(this->mapa,this->waz,this->pkt,this->Ruchoma);
-        this->Funkcje.draw(App,this->mapa,this->waz,this->pkt,this->Ruchoma);
-        //this->mapa.show();
+        this->Funkcje.ustaw_ID_na_mapie(this->mapa,this->waz,this->pkt,this->Ruchoma,this->laser);
+        this->Funkcje.draw(App,this->mapa,this->waz,this->pkt,this->Ruchoma,this->laser);
         this->Funkcje.kolizje(App,this->waz,this->mapa,this->pkt,this->Ruchoma);
     }
 }
