@@ -3,6 +3,8 @@
 #include "Tablice.hpp"
 #include "Punkty.hpp"
 #include "Ruchoma.hpp"
+#include <iostream>
+#include <sstream>
 #ifndef SNAKE_HPP_INCLUDED
 #define SNAKE_HPP_INCLUDED
 
@@ -50,6 +52,8 @@ public:
     void dodaj_punkt(Punkty& pkt,Tablice& mapa);
 
     void dodaj_wzrost_weza();
+
+    void zmiana_int_na_string();
 
 //konstruktor domyslny
     Snake();

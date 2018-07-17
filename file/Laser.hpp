@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Tablice.hpp"
+#include "Snake.hpp"
 #ifndef Laser_hpp
 #define Laser_hpp
 
@@ -10,13 +11,14 @@ public:
     int Y;
     int ID;
     bool kierunek;
-    int do_3;
+    int do_7;
 
     bool pion;
 
     sf::Texture Texture;
     sf::Sprite Sprite;
 
+    bool kolizja(Snake& waz);
     void ruch(Tablice& mapa);
     bool koniec(Tablice& mapa);
     void losuj(Tablice& mapa);

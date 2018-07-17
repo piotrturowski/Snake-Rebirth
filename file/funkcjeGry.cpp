@@ -72,6 +72,7 @@ void funkcje::sterowanie(Aplikacja& App,Snake& waz)
 void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruchoma,Laser& laser)
 {
     App.okno.clear(sf::Color::Green);
+    App.okno.draw(waz.wynik);
     for(int i = 0; i<=mapa.X; i++)
         {
             for(int j = 0; j<=mapa.Y; j++)
@@ -166,13 +167,17 @@ void funkcje::ustaw_ID_na_mapie(Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruc
     laser.ustaw_ID(mapa);
 }
 
-void funkcje::kolizje(Aplikacja& App,Snake& waz,Tablice& mapa,Punkty& pkt,Sciana& Ruchoma)
+void funkcje::kolizje(Aplikacja& App,Snake& waz,Tablice& mapa,Punkty& pkt,Sciana& Ruchoma,Laser& laser)
 {
     if(waz.kolizja_z_ogonem()||this->kolizja(waz,mapa))
     {
         App.okno.close();
     }
     waz.kolizja_ogony_z_ruchoma_siana(Ruchoma);
+    if(laser.kolizja(waz))
+    {
+        App.okno.close();
+    }
 
 }
 

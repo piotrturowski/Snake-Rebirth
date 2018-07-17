@@ -28,7 +28,7 @@ Snake::Snake(int x,int y,Tablice& mapa)
     this->Text_WorL.setCharacterSize(35);
     this->wynik.setColor(sf::Color::White);
     this->Text_WorL.setColor(sf::Color::White);
-    this->wynik.setPosition(mapa.X*30,mapa.Y*27);
+    this->wynik.setPosition(275,225);
     this->znak_do_bledu_podwojnego_klawisza = 100;
     this->X_ogonu = new int [this->pkt+2];
     this->Y_ogonu = new int [this->pkt+2];
@@ -59,6 +59,7 @@ Snake::~Snake()
 }
 void Snake::aktualizuj_wynik()
 {
+    this->zmiana_int_na_string();
     this->wynik.setString(this->liczba_wyniku);
 }
 
@@ -157,7 +158,9 @@ void Snake::dodaj_punkt(Punkty& pkt,Tablice& mapa)
         this->pkt++;
         this->dodaj_wzrost_weza();
         pkt.losuj(mapa.X,mapa.Y);
+
     }
+    this->aktualizuj_wynik();
 }
 
 void Snake::dodaj_wzrost_weza()
@@ -203,4 +206,11 @@ void Snake::kolizja_ogony_z_ruchoma_siana(Sciana& Ruchoma)
             this->pkt--;
         }
     }
+}
+
+void Snake::zmiana_int_na_string()
+{
+        stringstream sso;
+        sso << this->pkt;
+        sso >> this->liczba_wyniku;
 }

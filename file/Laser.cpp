@@ -21,7 +21,7 @@ Laser::~Laser()
 
 void Laser::losuj(Tablice& mapa)
 {
-    this->do_3 = 0;
+    this->do_7 = 0;
     switch(rand() % 2+0)
     {
     case 0:
@@ -64,7 +64,7 @@ void Laser::ustaw_ID(Tablice& mapa)
 
 bool Laser::koniec(Tablice& mapa)
 {
-    if(do_3 == 3)
+    if(do_7 == 7)
     {
         this->losuj(mapa);
     }
@@ -72,6 +72,8 @@ bool Laser::koniec(Tablice& mapa)
 
 void Laser::ruch(Tablice& mapa)
 {
+    if(do_7 == 2 || do_7 == 4 || do_7 == 6)
+    {
         switch(this->kierunek)
         {
         case 0: // w gore ruch i lewo
@@ -112,5 +114,30 @@ void Laser::ruch(Tablice& mapa)
                 break;
             }
         }
-        this->do_3++;
+    }
+    this->do_7++;
+}
+
+bool Laser::kolizja(Snake& waz)
+{
+    switch(this->pion)
+        {
+        case 0: // gora dol
+            {
+                if(this->Y == waz.Y)
+                {
+                    return true;
+                }
+                break;
+            }
+        case 1: // lewo prawo
+            {
+                if(this->X == waz.X)
+                {
+                    return true;
+                }
+                break;
+            }
+        }
+        return false;
 }
