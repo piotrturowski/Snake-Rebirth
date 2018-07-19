@@ -39,9 +39,9 @@ public:
     sf::Sprite Sprite_cialo;
 
 
-    bool kolizja_z_ogonem();
+    bool kolizja_z_ogonem(int x, int y);
 
-    void kolizja_ogony_z_ruchoma_siana(Sciana& Ruchoma);
+    bool kolizja_ogony_z_ruchoma_siana(Sciana& Ruchoma);
 //sterowanie
     void Sterowanie(Tablice& mapa);
 //rekurencja ruchu ogona

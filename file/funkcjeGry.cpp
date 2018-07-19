@@ -11,7 +11,7 @@ bool funkcje::wyjscie(Aplikacja& App)
     return false;
 }
 
-void funkcje::sterowanie(Aplikacja& App,Snake& waz)
+void funkcje::sterowanie(Aplikacja& App,Snake& waz,Snake& waz2)
 {
     while(App.okno.pollEvent(this->event))
         {
@@ -55,6 +55,45 @@ void funkcje::sterowanie(Aplikacja& App,Snake& waz)
                         }
                         break;
                     }
+                    if(this->tryb_multi == true)
+                    {
+                    case sf::Keyboard::Up:
+                        {
+                            waz2.aktualny_znak = 119;
+                            if(waz2.aktualny_znak != waz2.znak_do_bledu_podwojnego_klawisza)
+                            {
+                                waz2.znak = 119;
+                            }
+                            break;
+                        }
+                    case sf::Keyboard::Down:
+                        {
+                            waz2.aktualny_znak = 115;
+                            if(waz2.aktualny_znak != waz2.znak_do_bledu_podwojnego_klawisza)
+                            {
+                                waz2.znak = 115;
+                            }
+                            break;
+                        }
+                    case sf::Keyboard::Left:
+                        {
+                            waz2.aktualny_znak = 97;
+                            if(waz2.aktualny_znak != waz2.znak_do_bledu_podwojnego_klawisza)
+                            {
+                                waz2.znak = 97;
+                            }
+                            break;
+                        }
+                    case sf::Keyboard::Right:
+                        {
+                            waz2.aktualny_znak = 100;
+                            if(waz2.aktualny_znak != waz2.znak_do_bledu_podwojnego_klawisza)
+                            {
+                                waz2.znak = 100;
+                            }
+                            break;
+                        }
+                    }
                 }
             }
             switch(this->event.type)
@@ -69,7 +108,7 @@ void funkcje::sterowanie(Aplikacja& App,Snake& waz)
         }
 }
 
-void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruchoma,Laser& laser)
+void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruchoma,Laser& laser,Snake& waz2)
 {
     App.okno.clear(sf::Color::Green);
     App.okno.draw(waz.wynik);
@@ -81,8 +120,7 @@ void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& R
                 {
                 case 1:
                     {
-                        waz.Sprite_glowa.setPosition(i * mapa.wielkosc_grafik + waz.blad_ruchu_X ,j * mapa.wielkosc_grafik + waz.blad_ruchu_Y);
-                        App.okno.draw(waz.Sprite_glowa);
+
                         break;
                     }
                 case 2:
@@ -131,25 +169,29 @@ void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& R
                 //std::cout << i << std::endl << j << std::endl << std::endl;
             }
 
+
+        }
+        waz.Sprite_glowa.setPosition(waz.X * mapa.wielkosc_grafik + waz.blad_ruchu_X ,waz.Y * mapa.wielkosc_grafik + waz.blad_ruchu_Y);
+        App.okno.draw(waz.Sprite_glowa);
+        if(this->tryb_multi==true)
+        {
+            waz2.Sprite_glowa.setPosition(waz2.X * mapa.wielkosc_grafik + waz2.blad_ruchu_X ,waz2.Y * mapa.wielkosc_grafik + waz2.blad_ruchu_Y);
+            App.okno.draw(waz2.Sprite_glowa);
         }
         App.okno.display();
 
 
 }
 
-void funkcje::ustaw_ID_na_mapie(Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruchoma,Laser& laser)
+void funkcje::ustaw_ID_na_mapie(Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruchoma,Laser& laser,Snake& waz2)
 {
     mapa.zeruj();//czyszczenie mapy
-    int XX;
-    int YY;
-    mapa.tab[waz.X][waz.Y] = waz.ID;//ustawianie ID glowy snake
-    for(int i = 0; i<=waz.pkt+1; i++)
-    {
-        XX = waz.X_ogonu[i];
-        YY = waz.Y_ogonu[i];
-        mapa.tab[XX][YY] = waz.ogon_ID; // ustawianie ID ciala snake
-    }
 
+    this->ustawianie_weza(mapa,waz);
+    if(this->tryb_multi)
+    {
+        this->ustawianie_weza(mapa,waz2);
+    }
     mapa.tab[pkt.X][pkt.Y] = pkt.ID; // ustawianie ID punktu
 
     for(int j =  0; j<= mapa.X; j++)
@@ -167,18 +209,43 @@ void funkcje::ustaw_ID_na_mapie(Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruc
     laser.ustaw_ID(mapa);
 }
 
-void funkcje::kolizje(Aplikacja& App,Snake& waz,Tablice& mapa,Punkty& pkt,Sciana& Ruchoma,Laser& laser)
+void funkcje::kolizje(Aplikacja& App,Snake& waz,Tablice& mapa,Punkty& pkt,Sciana& Ruchoma,Laser& laser,Snake& waz2)
 {
-    if(waz.kolizja_z_ogonem()||this->kolizja(waz,mapa))
+    if(waz.kolizja_z_ogonem(waz.X,waz.Y)||this->kolizja(waz,mapa))
     {
         App.okno.close();
     }
-    waz.kolizja_ogony_z_ruchoma_siana(Ruchoma);
+    if(waz.kolizja_ogony_z_ruchoma_siana(Ruchoma))
+    {
+        App.okno.close();
+    }
     if(laser.kolizja(waz))
     {
         App.okno.close();
     }
-
+    if(this->tryb_multi == true)
+    {
+        if(waz2.kolizja_z_ogonem(waz2.X,waz2.Y)||this->kolizja(waz2,mapa))
+        {
+            App.okno.close();
+        }
+        if(waz2.kolizja_ogony_z_ruchoma_siana(Ruchoma))
+        {
+            App.okno.close();
+        }
+        if(laser.kolizja(waz2))
+        {
+            App.okno.close();
+        }
+        if(waz.X == waz2.X && waz.Y == waz2.Y)
+        {
+            App.okno.close();
+        }
+        if(waz.kolizja_z_ogonem(waz2.X,waz2.Y)||waz2.kolizja_z_ogonem(waz.X,waz.Y))
+        {
+            App.okno.close();
+        }
+    }
 }
 
 bool funkcje::kolizja(Snake& waz,Tablice& mapa)
@@ -190,5 +257,18 @@ bool funkcje::kolizja(Snake& waz,Tablice& mapa)
     }
 
     return false;
+}
+
+void funkcje::ustawianie_weza(Tablice& mapa,Snake& waz)
+{
+    int XX;
+    int YY;
+    mapa.tab[waz.X][waz.Y] = waz.ID;//ustawianie ID glowy snake
+    for(int i = 0; i<=waz.pkt+1; i++)
+    {
+        XX = waz.X_ogonu[i];
+        YY = waz.Y_ogonu[i];
+        mapa.tab[XX][YY] = waz.ogon_ID; // ustawianie ID ciala snake
+    }
 }
 

@@ -137,12 +137,12 @@ void Snake::ruch_ogona(int licznik)
     }
 }
 
-bool Snake::kolizja_z_ogonem()
+bool Snake::kolizja_z_ogonem(int x,int y)
 {
     for(int i = 0 ; i <= this->pkt+1 ; i++)
     {
 //kolizja glowy z ogonem
-        if(this->X == this->X_ogonu[i]&& this->Y == Y_ogonu[i])
+        if(x == this->X_ogonu[i]&& y == Y_ogonu[i])
         {
             return true;
         }
@@ -150,6 +150,7 @@ bool Snake::kolizja_z_ogonem()
 
     return false;
 }
+
 
 void Snake::dodaj_punkt(Punkty& pkt,Tablice& mapa)
 {
@@ -197,8 +198,9 @@ void Snake::dodaj_wzrost_weza()
         }
 }
 
-void Snake::kolizja_ogony_z_ruchoma_siana(Sciana& Ruchoma)
+bool Snake::kolizja_ogony_z_ruchoma_siana(Sciana& Ruchoma)
 {
+
     for(int i = 0; i<=this->pkt+1; i++)
     {
         if(this->X_ogonu[i] == Ruchoma.X && this->Y_ogonu[i] == Ruchoma.Y)
@@ -206,6 +208,11 @@ void Snake::kolizja_ogony_z_ruchoma_siana(Sciana& Ruchoma)
             this->pkt--;
         }
     }
+    if(this->X == Ruchoma.X && this->Y == Ruchoma.Y)
+    {
+        return true;
+    }
+    return false;
 }
 
 void Snake::zmiana_int_na_string()

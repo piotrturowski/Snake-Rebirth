@@ -17,6 +17,7 @@ public:
     bool tryb_multi;
     Tablice mapa;
     Snake waz;
+    Snake waz2;
     czaS czas;
     funkcje Funkcje;
     Punkty pkt;
