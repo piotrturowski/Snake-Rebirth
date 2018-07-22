@@ -12,6 +12,15 @@ Game::Game(bool tryb_multiplayer)
 {
     this->tryb_multi = tryb_multiplayer;
     this->Funkcje.tryb_multi = tryb_multiplayer;
+    if(tryb_multiplayer == false)
+    {
+        this->waz.wynik.setPosition(275,225);
+    }
+    if(tryb_multiplayer == true)
+    {
+        this->waz.wynik.setPosition(160,225);
+        this->waz2.wynik.setPosition(415,225);
+    }
 }
 
 Game::~Game()

@@ -17,6 +17,7 @@ public:
     bool tryb_multi;
     sf::Event event;
 
+
     void sterowanie(Aplikacja& App,Snake& waz,Snake& waz2);
     void kolizje(Aplikacja& App, Snake& waz,Tablice& mapa,Punkty& pkt,Sciana& Ruchoma,Laser& laser,Snake& waz2);
     bool kolizja(Snake& waz,Tablice& mapa);

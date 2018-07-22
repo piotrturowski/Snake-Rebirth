@@ -112,6 +112,13 @@ void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& R
 {
     App.okno.clear(sf::Color::Green);
     App.okno.draw(waz.wynik);
+    if(this->tryb_multi == true)
+    {
+        sf::RectangleShape line(sf::Vector2f(5, 540));
+        line.setPosition(300,30);
+        App.okno.draw(line);
+        App.okno.draw(waz2.wynik);
+    }
     for(int i = 0; i<=mapa.X; i++)
         {
             for(int j = 0; j<=mapa.Y; j++)

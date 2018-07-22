@@ -55,6 +55,8 @@ public:
 
     void zmiana_int_na_string();
 
+
+
 //konstruktor domyslny
     Snake();
 //konstruktor

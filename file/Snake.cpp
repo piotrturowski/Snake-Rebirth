@@ -28,7 +28,7 @@ Snake::Snake(int x,int y,Tablice& mapa)
     this->Text_WorL.setCharacterSize(35);
     this->wynik.setColor(sf::Color::White);
     this->Text_WorL.setColor(sf::Color::White);
-    this->wynik.setPosition(275,225);
+
     this->znak_do_bledu_podwojnego_klawisza = 100;
     this->X_ogonu = new int [this->pkt+2];
     this->Y_ogonu = new int [this->pkt+2];
