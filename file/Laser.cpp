@@ -118,13 +118,13 @@ void Laser::ruch(Tablice& mapa)
     this->do_7++;
 }
 
-bool Laser::kolizja(Snake& waz)
+bool Laser::kolizja(int x, int y)
 {
     switch(this->pion)
         {
         case 0: // gora dol
             {
-                if(this->Y == waz.Y)
+                if(this->Y == y)
                 {
                     return true;
                 }
@@ -132,7 +132,7 @@ bool Laser::kolizja(Snake& waz)
             }
         case 1: // lewo prawo
             {
-                if(this->X == waz.X)
+                if(this->X == x)
                 {
                     return true;
                 }
@@ -140,4 +140,32 @@ bool Laser::kolizja(Snake& waz)
             }
         }
         return false;
+}
+
+bool Laser::kolizja_z_ogonem(int tab_ogonu[],int pkt)
+{
+    for(int i = 0; i<= pkt; i++)
+    {
+    switch(this->pion)
+        {
+        case 0: // gora dol
+            {
+                if(this->Y == tab_ogonu[i])
+                {
+                    return true;
+                }
+                break;
+            }
+        case 1: // lewo prawo
+            {
+                if(this->X == tab_ogonu[i])
+                {
+                    return true;
+                }
+                break;
+            }
+        }
+    }
+    return false;
+
 }

@@ -11,6 +11,7 @@ public:
     Ready jeden_gracz;
     Ready dwoch_graczy;
     Ready wyjscie;
+    Ready tlo;
 
     void run(Aplikacja& App, Menu& menu);
     void rysuj(Aplikacja& App);

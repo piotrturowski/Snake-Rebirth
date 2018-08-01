@@ -8,6 +8,7 @@ Menu::Menu(Aplikacja& App)
     this->jeden_gracz.nadaj_teksture("file/art/jeden gracz.png",((App.szerokosc/2)-90),((App.wysokosc/2)-90));
     this->dwoch_graczy.nadaj_teksture("file/art/Dwoch graczy.png",((App.szerokosc/2)-90),(App.wysokosc/2)-30);
     this->wyjscie.nadaj_teksture("file/art/Wyjscie.png",((App.szerokosc/2)-90),((App.wysokosc/2)+30));
+    this->tlo.nadaj_teksture("file/art/Tlo.png",0,0);
 }
 
 Menu::~Menu()
@@ -28,6 +29,7 @@ void Menu::run(Aplikacja& App,Menu& menu)
 void Menu::rysuj(Aplikacja& App)
 {
     App.okno.clear(sf::Color::Green);
+    App.okno.draw(this->tlo.Sprite);
     App.okno.draw(this->jeden_gracz.Sprite);
     App.okno.draw(this->dwoch_graczy.Sprite);
     App.okno.draw(this->wyjscie.Sprite);

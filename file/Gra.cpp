@@ -15,11 +15,14 @@ Game::Game(bool tryb_multiplayer)
     if(tryb_multiplayer == false)
     {
         this->waz.wynik.setPosition(275,225);
+        this->waz.Text_WorL.setPosition(230,330);
     }
     if(tryb_multiplayer == true)
     {
         this->waz.wynik.setPosition(160,225);
         this->waz2.wynik.setPosition(415,225);
+        this->waz.Text_WorL.setPosition(110,330);
+        this->waz2.Text_WorL.setPosition(370,330);
     }
 }
 

@@ -29,6 +29,7 @@ Snake::Snake(int x,int y,Tablice& mapa)
     this->wynik.setColor(sf::Color::White);
     this->Text_WorL.setColor(sf::Color::White);
 
+
     this->znak_do_bledu_podwojnego_klawisza = 100;
     this->X_ogonu = new int [this->pkt+2];
     this->Y_ogonu = new int [this->pkt+2];
@@ -151,7 +152,6 @@ bool Snake::kolizja_z_ogonem(int x,int y)
     return false;
 }
 
-
 void Snake::dodaj_punkt(Punkty& pkt,Tablice& mapa)
 {
     if(this->X == pkt.X && this->Y == pkt.Y)
@@ -164,39 +164,50 @@ void Snake::dodaj_punkt(Punkty& pkt,Tablice& mapa)
     this->aktualizuj_wynik();
 }
 
-void Snake::dodaj_wzrost_weza()
+void Snake::dodaj_wzrost_weza()//-1
 {
-        int X_ogonu2[this->pkt+1];
-        int Y_ogonu2[this->pkt+1];
-        for(int i = 0; i <= this->pkt+1 ; i++)
-        {
 
-            if(this->pkt >= i)
+//tworzy do skopiowania tablice
+        std::cout << "tworze tablice" << endl << pkt << endl;
+        int X_ogonu2[this->pkt+1];//0
+        int Y_ogonu2[this->pkt+1];
+//petla kopiujaca +1 wzrost
+        for(int i = 0; i <= this->pkt+1 ; i++)//2
+        {
+//kopiuje ostatni element
+            if(this->pkt <= i)//1<=i
             {
+                std::cout << "kopiuje 1" << endl << pkt << endl;
+                X_ogonu2[i] = this->X_ogonu[i-1];
+                Y_ogonu2[i] = this->Y_ogonu[i-1];
+            }
+//kopiuje elementy drugiej tablicy
+            else//1>=i
+            {
+                std::cout << "kopiuje 2" << endl << pkt << endl;
                 X_ogonu2[i] = this->X_ogonu[i];
                 Y_ogonu2[i] = this->Y_ogonu[i];
 
             }
-            else
-            {
-
-                X_ogonu2[i] = this->X_ogonu[i-1];
-                Y_ogonu2[i] = this->Y_ogonu[i-1];
-            }
         }
-
+        std::cout << "kasuje" << endl << pkt << endl;
         delete[] this->X_ogonu;
         delete[] this->Y_ogonu;
 
-        this->X_ogonu = new int [this->pkt+2];
-        this->Y_ogonu = new int [this->pkt+2];
+        std::cout << "tworze tablice" << endl << pkt << endl;
+        this->X_ogonu = new int [this->pkt+2];//3
+        this->Y_ogonu = new int [this->pkt+2];//3
 
-        for(int i = 0; i <= this->pkt+1 ; i++)
+
+        for(int i = 0; i <= this->pkt+1 ; i++)//2
         {
+            std::cout << "przypisuje" << endl << pkt << endl;
             this->X_ogonu[i] = X_ogonu2[i];
             this->Y_ogonu[i] = Y_ogonu2[i];
         }
 }
+
+
 
 bool Snake::kolizja_ogony_z_ruchoma_siana(Sciana& Ruchoma)
 {
@@ -205,7 +216,11 @@ bool Snake::kolizja_ogony_z_ruchoma_siana(Sciana& Ruchoma)
     {
         if(this->X_ogonu[i] == Ruchoma.X && this->Y_ogonu[i] == Ruchoma.Y)
         {
-            this->pkt--;
+            if(pkt == 0)
+            {
+                return true;
+            }
+            this->odejmij_punkt();
         }
     }
     if(this->X == Ruchoma.X && this->Y == Ruchoma.Y)
@@ -220,4 +235,28 @@ void Snake::zmiana_int_na_string()
         stringstream sso;
         sso << this->pkt;
         sso >> this->liczba_wyniku;
+}
+
+void Snake::odejmij_punkt()
+{
+    if(this->pkt > 0)
+    {
+        pkt--;
+    }
+}
+
+void Snake::Wygrana()
+{
+    this->WorL = "Wygrana";
+    this->Text_WorL.setString(this->WorL);
+}
+void Snake::Przegrana()
+{
+    this->WorL = "Przegrana";
+    this->Text_WorL.setString(this->WorL);
+}
+void Snake::Remis()
+{
+    this->WorL = "Remis";
+    this->Text_WorL.setString(this->WorL);
 }

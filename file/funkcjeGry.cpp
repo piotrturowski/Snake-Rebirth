@@ -104,8 +104,8 @@ void funkcje::sterowanie(Aplikacja& App,Snake& waz,Snake& waz2)
                     App.okno.close();
                     break;
                 }
-            }
         }
+            }
 }
 
 void funkcje::draw(Aplikacja& App,Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruchoma,Laser& laser,Snake& waz2)
@@ -218,39 +218,96 @@ void funkcje::ustaw_ID_na_mapie(Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruc
 
 void funkcje::kolizje(Aplikacja& App,Snake& waz,Tablice& mapa,Punkty& pkt,Sciana& Ruchoma,Laser& laser,Snake& waz2)
 {
-    if(waz.kolizja_z_ogonem(waz.X,waz.Y)||this->kolizja(waz,mapa))
+    if(waz.kolizja_z_ogonem(waz.X,waz.Y)||this->kolizja(waz,mapa)) //kolizja z mapa i ogonem
     {
+        waz.Przegrana();
+        if(this->tryb_multi == true)
+        {
+            waz2.Wygrana();
+        }
+        this->koniec_gry(App,waz,waz2);
         App.okno.close();
     }
-    if(waz.kolizja_ogony_z_ruchoma_siana(Ruchoma))
+    if(waz.kolizja_ogony_z_ruchoma_siana(Ruchoma)) // kolizja z ruchoma sciana
     {
+        waz.Przegrana();
+        if(this->tryb_multi == true)
+        {
+            waz2.Wygrana();
+        }
+        this->koniec_gry(App,waz,waz2);
         App.okno.close();
     }
-    if(laser.kolizja(waz))
+    if(laser.kolizja(waz.X,waz.Y)) //kolizja glowy weza z laserem
     {
+        waz.Przegrana();
+        if(this->tryb_multi == true)
+        {
+            waz2.Wygrana();
+        }
+        this->koniec_gry(App,waz,waz2);
         App.okno.close();
+    }
+    if(laser.kolizja_z_ogonem(waz.X_ogonu,waz.pkt+1)||laser.kolizja_z_ogonem(waz.Y_ogonu,waz.pkt+1))
+    {
+        waz.odejmij_punkt();
+
     }
     if(this->tryb_multi == true)
     {
         if(waz2.kolizja_z_ogonem(waz2.X,waz2.Y)||this->kolizja(waz2,mapa))
         {
+            waz2.Przegrana();
+            if(this->tryb_multi == true)
+            {
+                waz2.Wygrana();
+            }
+            this->koniec_gry(App,waz,waz2);
             App.okno.close();
         }
         if(waz2.kolizja_ogony_z_ruchoma_siana(Ruchoma))
         {
+            waz2.Przegrana();
+            if(this->tryb_multi == true)
+            {
+                waz2.Wygrana();
+            }
+            this->koniec_gry(App,waz,waz2);
             App.okno.close();
         }
-        if(laser.kolizja(waz2))
+        if(laser.kolizja(waz2.X,waz2.Y))
         {
+            waz2.Przegrana();
+            if(this->tryb_multi == true)
+            {
+                waz2.Wygrana();
+            }
+            this->koniec_gry(App,waz,waz2);
             App.okno.close();
         }
         if(waz.X == waz2.X && waz.Y == waz2.Y)
         {
+            waz2.Przegrana();
+            if(this->tryb_multi == true)
+            {
+                waz2.Wygrana();
+            }
+            this->koniec_gry(App,waz,waz2);
             App.okno.close();
         }
         if(waz.kolizja_z_ogonem(waz2.X,waz2.Y)||waz2.kolizja_z_ogonem(waz.X,waz.Y))
         {
+            waz2.Przegrana();
+            if(this->tryb_multi == true)
+            {
+                waz2.Wygrana();
+            }
+            this->koniec_gry(App,waz,waz2);
             App.okno.close();
+        }
+        if(laser.kolizja_z_ogonem(waz2.X_ogonu,waz2.pkt+1)||laser.kolizja_z_ogonem(waz2.Y_ogonu,waz2.pkt+1))
+        {
+            waz2.odejmij_punkt();
         }
     }
 }
@@ -276,6 +333,20 @@ void funkcje::ustawianie_weza(Tablice& mapa,Snake& waz)
         XX = waz.X_ogonu[i];
         YY = waz.Y_ogonu[i];
         mapa.tab[XX][YY] = waz.ogon_ID; // ustawianie ID ciala snake
+    }
+}
+
+void funkcje::koniec_gry(Aplikacja& App,Snake& waz, Snake& waz2)
+{
+    App.okno.draw(waz.Text_WorL);
+    App.okno.draw(waz2.Text_WorL);
+    App.okno.display();
+    while(!App.okno.pollEvent(this->event))
+    {
+        if(this->event.type == sf::Event::KeyPressed)
+        {
+            break;
+        }
     }
 }
 

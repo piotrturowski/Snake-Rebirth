@@ -55,6 +55,14 @@ public:
 
     void zmiana_int_na_string();
 
+    void odejmij_punkt();
+
+    void Wygrana();
+
+    void Przegrana();
+
+    void Remis();
+
 
 
 //konstruktor domyslny
