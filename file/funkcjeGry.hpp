@@ -15,7 +15,9 @@ class funkcje
 {
 public:
     bool tryb_multi;
+    int maksymalna_ilosc_punktow;
     sf::Event event;
+
 
 
     void sterowanie(Aplikacja& App,Snake& waz,Snake& waz2);
@@ -27,6 +29,7 @@ public:
     void ustaw_ID_na_mapie(Tablice& mapa,Snake& waz,Punkty& pkt,Sciana& Ruchoma,Laser& laser,Snake& waz2);
     void ustawianie_weza(Tablice& mapa,Snake& waz);
     void koniec_gry(Aplikacja& App, Snake& waz, Snake& waz2);
+    void maxpkt(Aplikacja& App,Snake& waz, Snake& waz2);
 };
 
 #endif

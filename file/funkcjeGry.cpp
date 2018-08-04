@@ -350,3 +350,24 @@ void funkcje::koniec_gry(Aplikacja& App,Snake& waz, Snake& waz2)
     }
 }
 
+void funkcje::maxpkt(Aplikacja& App,Snake& waz, Snake& waz2)
+{
+    if(waz.pkt == this->maksymalna_ilosc_punktow)
+    {
+        waz.Wygrana();
+        if(this->tryb_multi == true)
+        {
+            waz2.Przegrana();
+        }
+        this->koniec_gry(App,waz,waz2);
+        App.okno.close();
+    }
+    if(waz2.pkt == this->maksymalna_ilosc_punktow && this->tryb_multi == true)
+    {
+        waz.Przegrana();
+        waz2.Wygrana();
+        this->koniec_gry(App,waz,waz2);
+        App.okno.close();
+    }
+}
+

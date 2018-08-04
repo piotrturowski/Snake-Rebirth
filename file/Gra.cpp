@@ -24,6 +24,7 @@ Game::Game(bool tryb_multiplayer)
         this->waz.Text_WorL.setPosition(110,330);
         this->waz2.Text_WorL.setPosition(370,330);
     }
+    this->Funkcje.maksymalna_ilosc_punktow = 10;
 }
 
 Game::~Game()
@@ -59,5 +60,6 @@ void Game::run(Aplikacja& App)
         this->Funkcje.ustaw_ID_na_mapie(this->mapa,this->waz,this->pkt,this->Ruchoma,this->laser,this->waz2);
         this->Funkcje.draw(App,this->mapa,this->waz,this->pkt,this->Ruchoma,this->laser,this->waz2);
         this->Funkcje.kolizje(App,this->waz,this->mapa,this->pkt,this->Ruchoma,this->laser,this->waz2);
+        this->Funkcje.maxpkt(App,this->waz,this->waz2);
     }
 }
